@@ -1,15 +1,15 @@
 import React from 'react'
 import {Header} from '../../components/Header'
 import {Footer} from '../../components/Footer'
-import {Form} from '../../components/Form/login'
+import {Form} from '../../components/Form/register'
 
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <>
-    <Header path={['Cadastro', '/signup']}/>
+    <Header path={['Entrar', '/login']}/>
     <Form/>
     <Footer/>
     </>
   )
 }
-export default LoginPage;
+export default SignUpPage;

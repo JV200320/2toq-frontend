@@ -1,0 +1,17 @@
+.contatos{
+  
+}
+.mobile{
+  text-decoration: none;
+  color: black
+}
+  @media (max-width:540px) {
+    .contatos{
+      display: none;
+    }
+    .mobile {
+      font-size: 13px;
+      text-decoration: none;
+      color: black
+    }
+  }
