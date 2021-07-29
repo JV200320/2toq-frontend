@@ -1,6 +1,8 @@
 
 import {Container, Row , Card, Button} from 'react-bootstrap'
 import Order from './Order'
+import Link from 'next/link'
+
 
 
 
@@ -64,7 +66,10 @@ const ListOrders = () => {
   return (
     <>
     <Container className = "mt-4">
+      <Link href = '/order/new'>
           <Button>Novo Pedido</Button>
+      
+      </Link>
       <Row className = "mt-4">
         {renderContent()}
       </Row>

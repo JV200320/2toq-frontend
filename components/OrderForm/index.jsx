@@ -1,10 +1,13 @@
-import React from 'react'
 import { Button, Col, Row, Form as Formulario, Container } from 'react-bootstrap'
-
+import ModalAddProducts from '../ModalAddProducts'
+import { useState } from 'react';
 const OrderForm = () => {
 
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [ modalShow, setModalShow ] = useState(false);
+
 
   return (
 
@@ -40,7 +43,7 @@ const OrderForm = () => {
                 <h4>Adicionar Produto</h4>
               </Col>
               <Col>
-                <Button>Novo</Button>
+                <Button onClick={() => setModalShow(true)}>Novo</Button>
               </Col>
             </Row>
 
@@ -64,8 +67,15 @@ const OrderForm = () => {
 
         </Formulario.Group>
 
+        <ModalAddProducts
+        
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onShow={() => setModalShow(true)}  
+        />
 
-        <Button variant="primary" type="submit" className="w-25 mt-4">
+        <Button 
+          variant="primary" type="submit" className="w-25 mt-4">
           Confirmar Pedido
         </Button>
 
