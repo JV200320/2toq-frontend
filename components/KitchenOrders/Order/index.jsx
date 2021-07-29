@@ -17,7 +17,7 @@ const Order = (props) => {
         <Col className="col-2">
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-            <label className="form-check-label" for="flexSwitchCheckDefault">Pronto?</label>
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Pronto?</label>
           </div>
         </Col>
       </Row>

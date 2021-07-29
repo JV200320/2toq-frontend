@@ -1,21 +1,37 @@
 import React from 'react'
 import { Button, Form as Formulario, Container} from 'react-bootstrap'
+import UserService from '../../services/user'
+import { useRouter } from 'next/dist/client/router'
 
 export const Form = () => {
+
+  const router = useRouter()
 
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [passwordConfirm, setPasswordConfirm] = React.useState('')
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await UserService.register({ email: email, password: password,
+                                   password_confirmation:passwordConfirm,
+                                   name: name })
+      router.push('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Container className="text-center bg-danger">
-      <Formulario className="pt-4 pb-4">
+      <Formulario className="pt-4 pb-4" onSubmit={(e)=> handleSubmit(e)}>
         
         <Formulario.Group className="mb-3" controlId="formBasicName">
           <Formulario.Control
             type="text"
-            placeholder="Estabelecimento"
+            placeholder="Nome"
             value={name}
             onChange={(evt) => {setName(evt.target.value)}}
           />
