@@ -6,7 +6,7 @@ import {Form} from '../../components/Form/login'
 const LoginPage = () => {
   return (
     <>
-    <Header path={['Cadastro', '/signup']}/>
+    <Header path={['Cadastro', '/signup/employee', '/signup/establishment']} double={true}/>
     <Form/>
     <Footer/>
     </>

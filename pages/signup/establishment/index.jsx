@@ -1,7 +1,7 @@
 import React from 'react'
-import {Header} from '../../components/Header'
-import {Footer} from '../../components/Footer'
-import {Form} from '../../components/Form/register'
+import {Header} from '../../../components/Header'
+import {Footer} from '../../../components/Footer'
+import {Form} from '../../../components/Form/registerEstablishment'
 
 const SignUpPage = () => {
   return (
