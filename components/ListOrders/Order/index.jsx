@@ -1,9 +1,12 @@
 
 import { Row, Button, Col, Card } from 'react-bootstrap'
-
-
+import CancelOrderModal from '../../CancelOrderModal'
+import { useState } from 'react';
 
 const Order = (props) => {
+  const [ modalShow, setModalShow ] = useState(false);
+
+
   return (
 
     <>
@@ -17,8 +20,13 @@ const Order = (props) => {
           </Card>
         </Col>
         <Col className=' me-0'>
-          <Button variant="danger">Cancelar</Button>
+          <Button variant="danger" onClick={() => setModalShow(true)} >Cancelar</Button>
         </Col>
+        <CancelOrderModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          onShow={() => setModalShow(true)}      
+        />
       </Row>
 
 
