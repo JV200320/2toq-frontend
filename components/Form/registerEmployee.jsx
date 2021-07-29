@@ -15,7 +15,7 @@ export const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await UserService.register({ email: email, password: password,
+      await UserService.signUp({ email: email, password: password,
                                    password_confirmation:passwordConfirm,
                                    name: name })
       router.push('/login')

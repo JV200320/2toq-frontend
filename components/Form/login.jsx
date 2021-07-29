@@ -13,7 +13,7 @@ export const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await UserService.login({ email: email, password: password })
+      await UserService.signIn({ email: email, password: password })
       router.push('/kitchen')
     } catch (error) {
       console.log(error)
