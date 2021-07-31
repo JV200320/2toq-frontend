@@ -1,9 +1,9 @@
 .contatos{
-  
+  color: white
 }
 .mobile{
   text-decoration: none;
-  color: black
+  color: white
 }
   @media (max-width:540px) {
     .contatos{
@@ -12,6 +12,6 @@
     .mobile {
       font-size: 13px;
       text-decoration: none;
-      color: black
+      color: white
     }
   }

@@ -12,7 +12,7 @@ const Order = (props) => {
 
     <>
       <Row>
-        <Col>
+        <Col className="col-8 offset-sm-2 ">
           <Card className = 'mb-2'>
             <span>id do pedido: {props.id}</span> 
             <span>Cliente: {props.customer_name}</span>
@@ -20,18 +20,14 @@ const Order = (props) => {
             <span>valor R$ {props.price}</span> 
           </Card>
         </Col>
-        <Col className=' me-0'>
+        <Col className='col-2'>
           <Button variant="danger" onClick={() => setModalShow(true)} >Cancelar</Button>
         </Col>
-        <CancelOrderModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          onShow={() => setModalShow(true)}      
-        />
+          <CancelOrderModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}    
+          />
       </Row>
-
-
-
     </>
   )
 }

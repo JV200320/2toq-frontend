@@ -3,40 +3,31 @@ import { Button, Form as Formulario, Container} from 'react-bootstrap'
 
 export const Form = () => {
 
-  const [establishment, setEstablishment] = React.useState('')
   const [email, setEmail] = React.useState('')
-  const [cnpj, setCNPJ] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [passwordConfirm, setPasswordConfirm] = React.useState('')
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await UserService.signUp({ email: email, password: password,
+                                   password_confirmation:passwordConfirm})
+      router.push('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <Container className="text-center bg-danger">
-      <Formulario className="pt-4 pb-4">
-        
-        <Formulario.Group className="mb-3" controlId="formBasicEstablishment">
-          <Formulario.Control
-            type="text"
-            placeholder="Estabelecimento"
-            value={establishment}
-            onChange={(evt) => {setEstablishment(evt.target.value)}}
-          />
-        </Formulario.Group>
-        
+    <Container className="text-center bg-light rounded pt-5 pb-5">
+        <h3>Administrador</h3>
+      <Formulario onSubmit={() => handleSubmit()}>
         <Formulario.Group className="mb-3" controlId="formBasicEmail">
           <Formulario.Control
             type="email"
             placeholder="Email"
             value={email}
             onChange={(evt) => {setEmail(evt.target.value)}}
-          />
-        </Formulario.Group>
-        
-        <Formulario.Group className="mb-3" controlId="formBasicCNPJ">
-          <Formulario.Control
-            type="number"
-            placeholder="CNPJ"
-            value={cnpj}
-            onChange={(evt) => {setCNPJ(evt.target.value)}}
           />
         </Formulario.Group>
 
@@ -57,7 +48,7 @@ export const Form = () => {
             onChange={(evt) => {setPasswordConfirm(evt.target.value)}}
           />
         </Formulario.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="danger" type="submit">
           Cadastrar
         </Button>
       </Formulario>

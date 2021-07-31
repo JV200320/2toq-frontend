@@ -25,7 +25,8 @@ export const Form = () => {
   }
 
   return (
-    <Container className="text-center bg-danger">
+    <Container className="text-center bg-light rounded pt-5 pb-5">
+      <h3>Funcionário</h3>
       <Formulario className="pt-4 pb-4" onSubmit={(e)=> handleSubmit(e)}>
         
         <Formulario.Group className="mb-3" controlId="formBasicName">
@@ -63,7 +64,7 @@ export const Form = () => {
             onChange={(evt) => {setPasswordConfirm(evt.target.value)}}
           />
         </Formulario.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="danger" type="submit">
           Cadastrar
         </Button>
       </Formulario>

@@ -4,7 +4,6 @@ import OrderForm from '../../components/OrderForm'
 const newOrder = () => {
   return (
     <>
-      
       <OrderForm/>
     </>
   )

@@ -1,12 +1,15 @@
 
-import { Row, Button, Col, Card } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 
 
 
 const Order = (props) => {
+
   return (
-      <Row className="w-75">
-        <Col className="col-10">
+
+    <>
+      <Row>
+        <Col className="col-8 offset-sm-2 ">
           <Card className='mb-2'>
             <span>id do pedido: {props.id}</span>
             <span>Cliente: {props.customer_name}</span>
@@ -17,10 +20,11 @@ const Order = (props) => {
         <Col className="col-2">
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Pronto?</label>
+            <label className="form-check-label text-light" htmlFor="flexSwitchCheckDefault">Pronto?</label>
           </div>
         </Col>
       </Row>
+    </>
   )
 }
 

@@ -1,12 +1,7 @@
-
-import {Container, Row , Card, Button} from 'react-bootstrap'
+import {Container, Row, Col, Button} from 'react-bootstrap'
 import Order from './Order'
 import Link from 'next/link'
-
-
-
-
-
+import styles from '../../styles/Order.module.css'
 
 const ListOrders = () => {
   const orders = [
@@ -49,7 +44,23 @@ const ListOrders = () => {
       product: "lasanha",
       price: 12.50
   
-    }
+    },
+    {
+      id: 6,
+      customer_name: 'Rodrigo',
+      table: 2,
+      product: "lasanha",
+      price: 12.50
+  
+    },
+    {
+      id: 7,
+      customer_name: 'Rodrigo',
+      table: 2,
+      product: "lasanha",
+      price: 12.50
+  
+    },
   
   ]
 
@@ -65,15 +76,11 @@ const ListOrders = () => {
 
   return (
     <>
-    <Container className = "mt-4">
-      <Link href = '/order/new'>
-          <Button>Novo Pedido</Button>
-      
-      </Link>
-      <Row className = "mt-4">
-        {renderContent()}
-      </Row>
-    </Container> 
+      <Container className={`overflow-scroll fixed-bottom ${styles.fullvh}`}>
+            <Row className = "mt-4">
+              {renderContent()}
+            </Row>
+      </Container>
     </>
   )
 }
