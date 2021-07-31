@@ -21,8 +21,8 @@ export const Form = () => {
   }
 
   return (
-    <Container className="text-center bg-danger">
-      <Formulario className="pt-4 pb-4 d-flex flex-column align-items-center" onSubmit={(e) => handleSubmit(e)}>
+    <Container className="text-center bg-light rounded pt-5 pb-5">
+      <Formulario className="d-flex flex-column align-items-center" onSubmit={(e) => handleSubmit(e)}>
         <Formulario.Group className="mb-3 w-75" controlId="formBasicEmail">
           <Formulario.Control
             type="email"
@@ -40,10 +40,10 @@ export const Form = () => {
             onChange={(evt) => {setPassword(evt.target.value)}}
           />
         </Formulario.Group>
-        <Button variant="primary" type="submit" className="w-25">
+        <Button variant="danger" type="submit" className="w-25">
           Entrar
         </Button>
-        <a href="#">Esqueci minha senha</a>
+        <a href="#" className="mt-3 text-danger">Esqueci minha senha</a>
       </Formulario>
     </Container>
     

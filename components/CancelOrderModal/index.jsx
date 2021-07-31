@@ -3,32 +3,24 @@ import {Modal, Card, Button,Row, Col} from 'react-bootstrap'
 
 const CancelOrderModal = (props) => {
   return(
-
-    <>
     <Modal
       show={props.show}
       size='sm'
-      // aria-labelledby='contained-modal-title-vcenter'
-      // centered
       keyboard={false}
       onHide={() => props.onHide()}
+      className="text-center"
     >
-      <Modal.Header>
-        <h4 className = 'text-center'>Cancelar Pedido</h4>
+      <Modal.Header className="d-flex justify-content-center">
+        <h4>Cancelar Pedido</h4>
       </Modal.Header>
       <Modal.Body>
-      <Card>
-          <h5 className = 'text-center'>Tem certeza que deseja cancelar o pedido</h5>
-          <Row>
-            <Col><Button   variant = 'danger'>Sim</Button></Col> 
-            <Col><Button className = 'me-0'>Nao</Button></Col> 
-
+          <h5>Tem certeza que deseja cancelar o pedido?</h5>
+          <Row className="pt-3">
+            <Col><Button variant='danger'>Sim</Button></Col> 
+            <Col><Button onClick={() => {props.onHide()}}>Não</Button></Col> 
           </Row>
-      </Card>
       </Modal.Body>
     </Modal>
-    
-    </>
   )
 }
 

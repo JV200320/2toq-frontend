@@ -40,16 +40,15 @@ const ModalAddProducts = ({ show, onHide }) => {
       <Modal
         show={show}
         size='sm'
-        // aria-labelledby='contained-modal-title-vcenter'
-        // centered
         keyboard={false}
         onHide={() => onHide()}
+        className='text-center'
       >
-        <Modal.Header>
-          <h4 className='text-center'>Adicionar produto</h4>
+        <Modal.Header className="d-flex justify-content-center">
+          <h4>Adicionar produto</h4>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column align-items-center">
-          <Row className="mt-2">
+          <Row>
             <span>Produto</span>
           </Row>
           <Row>
@@ -69,7 +68,7 @@ const ModalAddProducts = ({ show, onHide }) => {
           <Row>
             <Form.Control type="textarea" size='md' value={observation} onChange={(evt) => setObservation(evt.target.value)}/>
           </Row>
-          <Button variant="success" className="mt-2">Adicionar</Button>
+          <Button variant="success" className="mt-3">Adicionar</Button>
         </Modal.Body>
       </Modal>
 

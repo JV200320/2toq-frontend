@@ -8,7 +8,7 @@ import styles from '../../styles/Footer.module.css'
 export const Footer = () => {
   return (
     <>
-      <Container fluid className="fixed-bottom bg-light p-3">
+      <Container fluid className="fixed-bottom bg-dark p-3">
         <Col className="justify-content-center d-flex" md={{span: 10, offset: 1}} sm={{span:12}}>
           <Row className="w-100">
             <Col className={styles.contatos}>
