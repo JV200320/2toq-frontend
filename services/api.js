@@ -40,7 +40,6 @@ api.interceptors.response.use(res => {
       fieldsName.forEach(error => {
         toast.error(error + ': ' + errors.fields[error].join(`, `))
       })
-
       console.log('errors', errors);
     }
   }
@@ -51,7 +50,6 @@ api.interceptors.response.use(res => {
   )) {
   Router.push('/login');
 }
-
 throw err;
 });
 
@@ -71,7 +69,6 @@ api.interceptors.request.use(req => {
     console.log('test')
     req.headers = { ...apiData, ...req.headers };
   }
-
   return req;
 })
 
