@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 const OrderForm = () => {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [customerName, setCustomerName] = useState('')
+  const [tableNumber, setTableNumber] = useState(1)
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -15,22 +15,17 @@ const OrderForm = () => {
       <h4>Cadastrar Novo Pedido</h4>
       <Formulario className="d-flex flex-column align-items-center">
         <Formulario.Group >
-          <Row>
+          <Row className="d-flex justify-content-center align-items-center">
             <Col>
               <Formulario.Control
-                type="email"
+                type="text"
                 placeholder="Nome do Cliente"
-                value={email}
-                onChange={(evt) => { setEmail(evt.target.value) }}
+                value={customerName}
+                onChange={(evt) => { setCustomerName(evt.target.value) }}
               />
             </Col>
             <Col>
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Mesa</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+              <Formulario.Control type="number" min={1} size='sm' placeholder="Mesa" onBlur={(evt) => setTableNumber(evt.target.value)}/>
             </Col>
           </Row>
           <Row className="mt-4">

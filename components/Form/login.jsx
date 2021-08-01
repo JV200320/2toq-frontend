@@ -35,7 +35,7 @@ export const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
       const response = await UserService.signIn({ email, password })
       const {  email: userEmail, name} = response.data.data;
@@ -50,6 +50,7 @@ export const Form = () => {
 
       router.push('/kitchen')
     } catch (error) {
+      console.log(error)
       toast.error("Erro ao logar")
     }
   }
