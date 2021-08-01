@@ -1,9 +1,32 @@
-import {Container, Row, Col, Button} from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap'
 import Order from './Order'
-import Link from 'next/link'
+import CategoriesService from '../../services/category'
+import ProductsService from '../../services/product'
 import styles from '../../styles/Order.module.css'
+import { useEffect } from 'react'
+
+import {useDispatch} from 'react-redux'
+import {setCategories} from '../../store/modules/categories/reducer'
+import {setProducts} from '../../store/modules/products/reducer'
 
 const ListOrders = () => {
+
+  const getCategories = async () => {
+    const res = await CategoriesService.index()
+    dispatch(setCategories(res.data['categories']))
+  }
+  const getProducts = async () => {
+    const res = await ProductsService.index()
+    dispatch(setProducts(res.data['products']))
+  }
+
+  const dispatch = useDispatch()
+
+  useEffect(async () => {
+    getCategories()
+    getProducts()
+  }, [])
+
   const orders = [
     {
       id: 1,
