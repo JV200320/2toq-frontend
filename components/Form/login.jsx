@@ -1,22 +1,56 @@
-import React from 'react'
 import { Button, Form as Formulario, Container} from 'react-bootstrap'
 import {useRouter} from 'next/router'
 import UserService from '../../services/user'
+import {useState, useEffect, useRef} from 'react'
+import { toast } from 'react-toastify';
+
+
+// redux 
+import {useSelector, useDispatch} from 'react-redux'
+import {setLoggedUser} from '../../store/modules/auth/reducer'
 
 export const Form = () => {
 
   const router = useRouter()
 
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const passwordRef = useRef(null)
+
+  //redux
+  const dispatch = useDispatch()
+  const loggedUser = useSelector((state) => state.auth.loggedUser)
+
+  useEffect(()=> {
+    if(loggedUser){
+      setEmail(loggedUser.email);
+      if (passwordRef && passwordRef.current){
+        passwordRef.current.focus();
+      }
+    }
+  }, [loggedUser])
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await UserService.signIn({ email: email, password: password })
+      const response = await UserService.signIn({ email, password })
+      const {  email: userEmail, name} = response.data.data;
+
+      const user  = {
+        name,
+        email: userEmail
+      }
+
+      dispatch(setLoggedUser(user))
+      toast.info('Login realizado')
+
       router.push('/kitchen')
     } catch (error) {
-      console.log(error)
+      toast.error("Erro ao logar")
     }
   }
 
@@ -37,7 +71,9 @@ export const Form = () => {
             type="password"
             placeholder="Senha"
             value={password}
-            onChange={(evt) => {setPassword(evt.target.value)}}
+            onChange={(evt) => setPassword(evt.target.value)}
+            required
+            ref = {passwordRef}
           />
         </Formulario.Group>
         <Button variant="danger" type="submit" className="w-25">
