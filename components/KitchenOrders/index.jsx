@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap';
 import Order from './Order';
 import styles from '../../styles/Order.module.css'
+import withAuthKitchen from '../withAuth/kitchen'
 
 const KitchenOrders = () => {
   const orders = [
@@ -73,11 +74,5 @@ const KitchenOrders = () => {
       </Container>
     </>
   )
-
-  // return (
-  //   <Container className="d-flex flex-column align-items-center overflow-auto" style={{marginTop: 70, height:550}}>
-  //     {renderContent()}
-  //   </Container>
-  // )
 }
-export default KitchenOrders;
+export default withAuthKitchen(KitchenOrders);
