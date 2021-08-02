@@ -3,59 +3,23 @@ import { Container, Row } from 'react-bootstrap';
 import Order from './Order';
 import styles from '../../styles/Order.module.css'
 import withAuthKitchen from '../withAuth/kitchen'
+import OrdersService from '../../services/order';
+import { useSelector } from 'react-redux';
 
 const KitchenOrders = () => {
-  const orders = [
-    {
-      id: 1,
-      customer_name: 'jefferson',
-      table: 2,
-      product: "lasanha",
-      price: 12.50
-  
-    },
-    {
-      id: 2,
-      customer_name: 'Renan',
-      table: 2,
-      product: "Macarronada",
-      price: 12.50
-  
-    },
-    {
-      id: 3,
-      customer_name: 'Joao',
-      table: 2,
-      product: "Humburguer",
-      price: 12.50
-  
-    }, 
-    {
-      id: 4,
-      customer_name: 'Nicolas',
-      table: 2,
-      product: "batata frita",
-      price: 12.50
-  
-    },
-    {
-      id: 5,
-      customer_name: 'Rodrigo',
-      table: 2,
-      product: "lasanha",
-      price: 12.50
-  
-    },
-    {
-      id: 6,
-      customer_name: 'Rodrigo',
-      table: 2,
-      product: "lasanha",
-      price: 12.50
-  
-    }
-  
-  ]
+
+  const user_id = useSelector(state => state.auth.loggedUser)
+
+  const getOrders = async () => {
+    const res = await OrdersService.index()
+    setOrders(res.data.orders)
+  }
+
+  const [orders, setOrders] = React.useState([])
+
+  React.useEffect(() => {
+    getOrders()
+  }, [])
 
   const renderContent = ()=>{
     if (orders.lenght == 0 ){

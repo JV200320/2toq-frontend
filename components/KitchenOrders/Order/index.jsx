@@ -4,7 +4,6 @@ import { Row, Col, Card } from 'react-bootstrap'
 
 
 const Order = (props) => {
-
   return (
 
     <>
@@ -14,7 +13,7 @@ const Order = (props) => {
             <span>id do pedido: {props.id}</span>
             <span>Cliente: {props.customer_name}</span>
             <span>Produto: {props.product}</span>
-            <span>valor R$ {props.price}</span>
+            <span>valor R$ {props.total_value}</span>
           </Card>
         </Col>
         <Col className="col-2">

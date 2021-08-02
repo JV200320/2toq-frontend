@@ -24,6 +24,7 @@ const Order = (props) => {
           <Button variant="danger" onClick={() => setModalShow(true)} >Cancelar</Button>
         </Col>
           <CancelOrderModal
+            id={props.id}
             show={modalShow}
             onHide={() => setModalShow(false)}    
           />
