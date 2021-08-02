@@ -22,11 +22,13 @@ export const Form = () => {
   const dispatch = useDispatch()
 
   useEffect(()=> {
-    const loggedUser = JSON.parse(Cookies.get("@api-data"))['uid']
-    if(loggedUser){
-      setEmail(loggedUser);
-      if (passwordRef && passwordRef.current){
-        passwordRef.current.focus();
+    if (Cookies.get("@api-data")) {
+      const loggedUser = JSON.parse(Cookies.get("@api-data"))['uid']
+      if(loggedUser){
+        setEmail(loggedUser);
+        if (passwordRef && passwordRef.current){
+          passwordRef.current.focus();
+        }
       }
     }
   }, [])
@@ -39,17 +41,24 @@ export const Form = () => {
     
     try {
       const response = await UserService.signIn({ email, password })
-      const {  email: userEmail, name} = response.data.data;
+      const {  email: userEmail, name,profile} = response.data.data;
 
       const user  = {
         name,
-        email: userEmail
+        email: userEmail,
+        profile
       }
 
       dispatch(setLoggedUser(user))
       toast.info('Login realizado')
-
-      router.push('/kitchen')
+      if (user.profile === "kitchen") {
+        router.push('/kitchen')
+      } else if (user.profile === "waiter") {
+        router.push('/order')
+      }else{
+        console.log('mandei pro admin')
+        // router.push('/order')
+      }
     } catch (error) {
       console.log(error)
       toast.error("Erro ao logar")

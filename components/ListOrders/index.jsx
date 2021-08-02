@@ -4,7 +4,7 @@ import CategoriesService from '../../services/category'
 import ProductsService from '../../services/product'
 import styles from '../../styles/Order.module.css'
 import { useEffect } from 'react'
-
+import withAuthWaiter from '../withAuth/waiter'
 import {useDispatch} from 'react-redux'
 import {setCategories} from '../../store/modules/categories/reducer'
 import {setProducts} from '../../store/modules/products/reducer'
@@ -108,4 +108,4 @@ const ListOrders = () => {
   )
 }
 
-export default ListOrders
+export default withAuthWaiter(ListOrders)
