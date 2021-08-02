@@ -8,9 +8,12 @@ const productsSlice = createSlice({
   reducers: {
     setProducts(state, action) {
       state.products = [...action.payload]
+    },
+    clearProducts(state, action) {
+      state.products = null
     }
   }
 })
 
-export const { setProducts } = productsSlice.actions;
+export const { setProducts, clearProducts } = productsSlice.actions;
 export default productsSlice.reducer;
