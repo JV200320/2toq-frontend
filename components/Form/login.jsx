@@ -6,8 +6,9 @@ import { toast } from 'react-toastify';
 
 
 // redux 
-import {useSelector, useDispatch} from 'react-redux'
+import { useDispatch} from 'react-redux'
 import {setLoggedUser} from '../../store/modules/auth/reducer'
+import Cookies from 'js-cookie';
 
 export const Form = () => {
 
@@ -19,16 +20,16 @@ export const Form = () => {
 
   //redux
   const dispatch = useDispatch()
-  const loggedUser = useSelector((state) => state.auth.loggedUser)
 
   useEffect(()=> {
+    const loggedUser = JSON.parse(Cookies.get("@api-data"))['uid']
     if(loggedUser){
-      setEmail(loggedUser.email);
+      setEmail(loggedUser);
       if (passwordRef && passwordRef.current){
         passwordRef.current.focus();
       }
     }
-  }, [loggedUser])
+  }, [])
 
 
 

@@ -24,7 +24,7 @@ export const Form = () => {
       await UserService.signUp({
         email: email, password: password,
         password_confirmation: passwordConfirm,
-        name: name
+        name: name, profile: type
       })
       router.push('/login')
     } catch (error) {
