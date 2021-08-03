@@ -7,9 +7,11 @@ import { clearProducts } from '../../store/modules/products/reducer'
 import { clearList } from '../../store/modules/toAddList/reducer'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/dist/client/router'
 
 export const Header = (props) => {
 
+  const router = useRouter()
   const dispatch = useDispatch()
 
   const handleLogout = () => {
@@ -19,6 +21,7 @@ export const Header = (props) => {
     dispatch(clearCategories())
     dispatch(clearProducts())
     dispatch(clearList())
+    router.push("/login")
   }
 
   if (props.double) {
@@ -48,11 +51,11 @@ export const Header = (props) => {
               props.new
                 ?
                 <>
-                  <Nav.Link href={props.path[1]} className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
+                  <Nav.Link href="#" className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
                   <Nav.Link href="/order/new" className="justify-content-center d-flex me-lg-4"><Button variant='primary'>Novo Pedido</Button></Nav.Link>
                 </>
                 :
-                <Nav.Link href={props.path[1]} className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
+                <Nav.Link href="#" className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
             }
           </Navbar.Collapse>
         </Navbar>

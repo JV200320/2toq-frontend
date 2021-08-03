@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SWRConfig value={{ fetcher: fetcher, refreshInterval: 2000 }}>
-            <ToastContainer />
+            <ToastContainer autoClose={1500} />
             <Component {...pageProps} />
           </SWRConfig>
         </PersistGate>

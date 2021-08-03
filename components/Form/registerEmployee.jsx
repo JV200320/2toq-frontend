@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form as Formulario, Container, InputGroup, Row, Col } from 'react-bootstrap'
 import UserService from '../../services/user'
 import { useRouter } from 'next/dist/client/router'
+import { toast } from 'react-toastify'
 
 export const Form = () => {
 
@@ -12,11 +13,6 @@ export const Form = () => {
   const [password, setPassword] = React.useState('')
   const [passwordConfirm, setPasswordConfirm] = React.useState('')
   const [type, setType] = React.useState(null)
-
-
-  React.useEffect(() => {
-    console.log(type)
-  }, [type])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
