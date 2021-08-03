@@ -26,8 +26,10 @@ export const Form = () => {
         password_confirmation: passwordConfirm,
         name: name, profile: type
       })
+      toast.success("Conta criada.")
       router.push('/login')
     } catch (error) {
+      toast.error("Erro ao criar conta.")
       console.log(error)
     }
   }
@@ -79,7 +81,7 @@ export const Form = () => {
               id={'default-radio'}
               label={'Garçom'}
               name="type"
-              onClick={()=> setType("waiter")}
+              onClick={() => setType("waiter")}
             />
           </Col>
           <Col className="col-2">
@@ -88,7 +90,7 @@ export const Form = () => {
               label={'Cozinheiro'}
               id={'default-radio'}
               name="type"
-              onClick={()=> setType("kitchen")}
+              onClick={() => setType("kitchen")}
             />
           </Col>
 

@@ -1,17 +1,19 @@
 import React from 'react'
-import { Navbar, Nav, Button,DropdownButton, Dropdown } from 'react-bootstrap'
+import { Navbar, Nav, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import {clearLoggedUser} from '../../store/modules/auth/reducer'
-import {clearCategories} from '../../store/modules/categories/reducer'
-import {clearProducts} from '../../store/modules/products/reducer'
-import {clearList} from '../../store/modules/toAddList/reducer'
+import { clearLoggedUser } from '../../store/modules/auth/reducer'
+import { clearCategories } from '../../store/modules/categories/reducer'
+import { clearProducts } from '../../store/modules/products/reducer'
+import { clearList } from '../../store/modules/toAddList/reducer'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 export const Header = (props) => {
 
   const dispatch = useDispatch()
 
   const handleLogout = () => {
+    toast.info("Você saiu da aplicação.")
     Cookies.remove("@api-data")
     dispatch(clearLoggedUser())
     dispatch(clearCategories())
@@ -44,13 +46,13 @@ export const Header = (props) => {
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             {
               props.new
-              ?
-              <>
-              <Nav.Link href={props.path[1]} className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
-              <Nav.Link href="/order/new" className="justify-content-center d-flex me-lg-4"><Button variant='primary'>Novo Pedido</Button></Nav.Link>
-              </>
-              :
-              <Nav.Link href={props.path[1]} className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
+                ?
+                <>
+                  <Nav.Link href={props.path[1]} className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
+                  <Nav.Link href="/order/new" className="justify-content-center d-flex me-lg-4"><Button variant='primary'>Novo Pedido</Button></Nav.Link>
+                </>
+                :
+                <Nav.Link href={props.path[1]} className="justify-content-center d-flex me-lg-4"><Button variant='outline-danger' onClick={() => handleLogout()}>{props.path[0]}</Button></Nav.Link>
             }
           </Navbar.Collapse>
         </Navbar>

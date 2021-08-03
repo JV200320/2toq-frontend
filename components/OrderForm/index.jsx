@@ -2,13 +2,18 @@ import { Button, Col, Row, Form as Formulario, Container, ButtonGroup } from 're
 import ModalAddProducts from '../ModalAddProducts'
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromList } from '../../store/modules/toAddList/reducer';
+import { clearList, removeFromList } from '../../store/modules/toAddList/reducer';
+import OrdersService from '../../services/order';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 const OrderForm = () => {
 
   const dispatch = useDispatch()
+  const router = useRouter()
 
-  const productList = useSelector( state => state.productList)
+  const productList = useSelector(state => state.productList)
+  const { id } = useSelector(state => state.auth.loggedUser)
   const [customerName, setCustomerName] = useState('')
   const [tableNumber, setTableNumber] = useState(1)
 
@@ -18,19 +23,29 @@ const OrderForm = () => {
     dispatch(removeFromList(i))
   }
 
-  // function handleSubmit(e) {
-  //   e.preventDefault()
-  //   try {
-      
-  //   } catch (error) {
-      
-  //   }
-  // }
+  async function handleSubmit(e) {
+    e.preventDefault()
+    try {
+      await OrdersService.create({
+        order: {
+          table_number: tableNumber,
+          customer_name: customerName,
+          user_id: id,
+        }
+      })
+      dispatch(clearList())
+      toast.success("Pedido criado")
+      router.push("/order")
+    } catch (error) {
+      toast.error("Erro ao criar pedido")
+
+    }
+  }
 
   return (
     <Container className="text-center rounded bg-light p-3">
       <h4>Cadastrar Novo Pedido</h4>
-      <Formulario className="d-flex flex-column align-items-center" onSubmit={(e) => {handleSubmit(e)}}>
+      <Formulario className="d-flex flex-column align-items-center" onSubmit={(e) => { handleSubmit(e) }}>
         <Formulario.Group >
           <Row className="d-flex justify-content-center align-items-center">
             <Col>
@@ -42,7 +57,7 @@ const OrderForm = () => {
               />
             </Col>
             <Col>
-              <Formulario.Control type="number" min={1} size='sm' placeholder="Mesa" onBlur={(evt) => setTableNumber(evt.target.value)}/>
+              <Formulario.Control type="number" min={1} size='sm' placeholder="Mesa" onBlur={(evt) => setTableNumber(evt.target.value)} />
             </Col>
           </Row>
           <Row className="mt-4">
@@ -53,22 +68,22 @@ const OrderForm = () => {
             </Row>
             {
               productList.length > 0
-              ?
-              productList.map((product,i) => (
-              <Row className='mt-4 d-flex justify-content-center align-items-center'>
-              <Col className="col-6">
-                <ButtonGroup aria-label="Basic example">
-                  <Button disabled variant="dark" className="text-light">{product['name']}</Button>
-                  <Button disabled variant="dark" className="text-light">{product['quantity']}</Button>
-                </ButtonGroup>
-              </Col>
-              <Col className="col-2">
-                <Button variant="danger" onClick={() => removeProduct(i)}>Remover</Button>
-              </Col>
-            </Row>
-              ))
-            :
-            null
+                ?
+                productList.map((product, i) => (
+                  <Row className='mt-4 d-flex justify-content-center align-items-center'>
+                    <Col className="col-6">
+                      <ButtonGroup aria-label="Basic example">
+                        <Button disabled variant="dark" className="text-light">{product['name']}</Button>
+                        <Button disabled variant="dark" className="text-light">{product['quantity']}</Button>
+                      </ButtonGroup>
+                    </Col>
+                    <Col className="col-2">
+                      <Button variant="danger" onClick={() => removeProduct(i)}>Remover</Button>
+                    </Col>
+                  </Row>
+                ))
+                :
+                null
             }
           </Row>
         </Formulario.Group>
