@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form as Formulario, Container, InputGroup, Row, Col } from 'react-bootstrap'
 import UserService from '../../services/user'
 import { useRouter } from 'next/dist/client/router'
+import { toast } from 'react-toastify'
 
 export const Form = () => {
 
@@ -13,11 +14,6 @@ export const Form = () => {
   const [passwordConfirm, setPasswordConfirm] = React.useState('')
   const [type, setType] = React.useState(null)
 
-
-  React.useEffect(() => {
-    console.log(type)
-  }, [type])
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,8 +22,10 @@ export const Form = () => {
         password_confirmation: passwordConfirm,
         name: name, profile: type
       })
+      toast.success("Conta criada.")
       router.push('/login')
     } catch (error) {
+      toast.error("Erro ao criar conta.")
       console.log(error)
     }
   }
@@ -79,7 +77,7 @@ export const Form = () => {
               id={'default-radio'}
               label={'Garçom'}
               name="type"
-              onClick={()=> setType("waiter")}
+              onClick={() => setType("waiter")}
             />
           </Col>
           <Col className="col-2">
@@ -88,7 +86,7 @@ export const Form = () => {
               label={'Cozinheiro'}
               id={'default-radio'}
               name="type"
-              onClick={()=> setType("kitchen")}
+              onClick={() => setType("kitchen")}
             />
           </Col>
 

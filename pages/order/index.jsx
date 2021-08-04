@@ -16,7 +16,7 @@ const Order = () => {
         </>
       )
     } else if (user.profile == "kitchen") {
-      router.push('/order')
+      router.push('/kitchen')
       return null
     } else if (user.profile == "admin") {
       // router.push('/order')
