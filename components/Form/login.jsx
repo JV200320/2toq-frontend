@@ -41,12 +41,13 @@ export const Form = () => {
     
     try {
       const response = await UserService.signIn({ email, password })
-      const {  email: userEmail, name,profile} = response.data.data;
+      const {  email: userEmail, name,profile,id} = response.data.data;
 
       const user  = {
         name,
         email: userEmail,
-        profile
+        profile,
+        id
       }
 
       dispatch(setLoggedUser(user))

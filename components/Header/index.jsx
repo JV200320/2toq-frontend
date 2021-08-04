@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import {clearLoggedUser} from '../../store/modules/auth/reducer'
 import {clearCategories} from '../../store/modules/categories/reducer'
 import {clearProducts} from '../../store/modules/products/reducer'
+import {clearList} from '../../store/modules/toAddList/reducer'
 import Cookies from 'js-cookie'
 
 export const Header = (props) => {
@@ -15,6 +16,7 @@ export const Header = (props) => {
     dispatch(clearLoggedUser())
     dispatch(clearCategories())
     dispatch(clearProducts())
+    dispatch(clearList())
   }
 
   if (props.double) {

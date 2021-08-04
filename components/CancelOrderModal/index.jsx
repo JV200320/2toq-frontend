@@ -1,7 +1,13 @@
 import {Modal, Card, Button,Row, Col} from 'react-bootstrap'
+import OrdersService from '../../services/order'
 
 
 const CancelOrderModal = (props) => {
+
+  const handleDelete = async (id) => {
+    await OrdersService.deleteOrder(id);
+  }
+
   return(
     <Modal
       show={props.show}
@@ -16,7 +22,7 @@ const CancelOrderModal = (props) => {
       <Modal.Body>
           <h5>Tem certeza que deseja cancelar o pedido?</h5>
           <Row className="pt-3">
-            <Col><Button variant='danger'>Sim</Button></Col> 
+            <Col><Button variant='danger' onClick={() => {handleDelete(props.id);props.onHide()}}>Sim</Button></Col> 
             <Col><Button onClick={() => {props.onHide()}}>Não</Button></Col> 
           </Row>
       </Modal.Body>
