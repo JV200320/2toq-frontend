@@ -8,15 +8,34 @@ import { setProducts } from '../../store/modules/products/reducer'
 import { useSelector } from 'react-redux'
 import useSWR from 'swr'
 
+import OrdersService from '../../services/order'
+
 const ListOrders = () => {
 
   const dispatch = useDispatch()
 
   const { id } = useSelector(state => state.auth.loggedUser)
+  // const { data, error} = useSWR(`/api/orders?user_id=${id}`, OrdersService.index)
+
+
+  // if(!data){
+  //   return null
+  // }
+
+  // console.log(data)
 
   const { data: categoriesData, error: categoriesError } = useSWR('/api/categories')
   const { data: productsData, error: productsError } = useSWR('/api/products')
-  const { data: ordersData, error: ordersError } = useSWR(`/api/orders?user_id=${id}`)
+  const { data: ordersData, error: ordersError, mutate } = useSWR(`/api/orders?user_id=${id}`)
+
+  function renderOrders() {
+    if (ordersData['data']) {
+      return ordersData['data']['orders'].map((order, i) => <Order {...order} key={i} mutate={mutate} />)
+    }
+    return null
+  }
+
+
 
   if (categoriesData) {
     dispatch(setCategories(categoriesData['data']['categories']))
@@ -31,7 +50,7 @@ const ListOrders = () => {
         <Row className="mt-4">
           {ordersData
             ?
-            ordersData['data']['orders'].map((order, i) => <Order {...order} key={i} />)
+            renderOrders()
             :
             <Col className="text-light">Carregando...</Col>
           }
