@@ -1,12 +1,11 @@
 import { Modal, Card, Button, Row, Col } from 'react-bootstrap'
 import OrdersService from '../../services/order'
-import { mutate } from 'swr'
 
 const CancelOrderModal = (props) => {
 
   const handleDelete = async (id) => {
     await OrdersService.deleteOrder(id);
-    mutate("/api/orders");
+    props.mutate("/api/orders");
   }
 
   return (
