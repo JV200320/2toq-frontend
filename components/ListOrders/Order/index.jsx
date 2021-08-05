@@ -25,6 +25,7 @@ const Order = (props) => {
         <CancelOrderModal
           id={props.id}
           show={modalShow}
+          mutate = {props.mutate}
           onHide={() => setModalShow(false)}
         />
       </Row>
