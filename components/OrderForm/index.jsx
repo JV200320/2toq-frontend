@@ -13,10 +13,25 @@ const OrderForm = () => {
   const router = useRouter()
 
   const productList = useSelector(state => state.productList)
+
+
   const { id } = useSelector(state => state.auth.loggedUser)
   const [customerName, setCustomerName] = useState('')
   const [tableNumber, setTableNumber] = useState(1)
 
+  // const [order, setOrder] = useState({
+  //   customerName: '',
+  //   tableNumber: '',
+  //   order_products_attributes: productList.map(p => (
+  //     {'order_id': p.id, 'quantity': p.quantity, 'observations': p.observations}
+  //   ))
+  // })
+
+
+
+
+
+  
   const [modalShow, setModalShow] = useState(false);
 
   function removeProduct(i) {
@@ -31,6 +46,9 @@ const OrderForm = () => {
           table_number: tableNumber,
           customer_name: customerName,
           user_id: id,
+          order_products_attributes: productList.map(p => (
+            {'product_id': p.id, 'quantity': p.quantity, 'observations': p.observations}
+          ))
         }
       })
       dispatch(clearList())
